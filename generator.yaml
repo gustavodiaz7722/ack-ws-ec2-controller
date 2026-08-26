@@ -780,6 +780,11 @@ resources:
         is_read_only: true
         print:
           name: ID
+      AddressFamily:
+        # AddressFamily is not supported in ModifyManagedPrefixList's input, so
+        # a change to it can never be reconciled. Reject it at admission rather
+        # than letting it sit as drift no update can clear.
+        is_immutable: true
       Name: {}
       State:
         is_read_only: true
